@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>SCREENSHOOTER</title>
+
+	<!--Custom stylesheet-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<h1>Texts</h1>
+{% for message in text %}
+	<p>{{ message }}</p>
+{% endfor %}
+<form method="post" action="/text">
+	<input type="text" name="text">
+	<input type="submit">
+</form>
+</body>
+</html>

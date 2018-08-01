@@ -1,15 +1,26 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import threading
 import pyautogui
 import time
 
 app = Flask(__name__)
 app.config['THREAD'] = None
+app.config['TEXT_LIST'] = []
 
 
 @app.route('/')
-def index():
+def page_index():
     return render_template('index.html')
+
+
+@app.route('/text', methods=['GET', 'POST'])
+def page_text():
+    if request.method == 'POST':
+        text = request.form.get('text', None)
+        if text:
+            app.config['TEXT_LIST'].append(text)
+
+    return render_template('text.html', text=app.config['TEXT_LIST'])
 
 
 @app.after_request
